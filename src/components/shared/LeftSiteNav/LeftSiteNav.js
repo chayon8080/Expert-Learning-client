@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './LeftSiteNav.css'
 const LeftSiteNav = () => {
     const [catagories, setCatagories] = useState([])
     useEffect(() => {
@@ -12,11 +13,13 @@ const LeftSiteNav = () => {
     return (
         <div>
             <h4>All Catagories</h4>
-            {
-                catagories.map(catagory => <p key={catagory.id}>
-                    <Link to={`/catagory/:${catagory.id}`}>{catagory.name}</Link>
-                </p>)
-            }
+            <div>
+                {
+                    catagories.map(catagory => <p key={catagory.id}>
+                        <Link to={`/catagory/${catagory.id}`}><button className='border text-center border-opacity-25 border-2 p-2 text'>{catagory.name}</button></Link>
+                    </p>)
+                }
+            </div>
         </div>
     );
 };
