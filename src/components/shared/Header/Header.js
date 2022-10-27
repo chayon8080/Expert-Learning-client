@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
+
 import './Header.css'
 const Header = () => {
     return (
@@ -21,6 +22,7 @@ const Header = () => {
                         <Link to='/'><Button className='ms-2'>Courses</Button></Link>
                         <Link to='/faq'><Button className='ms-2'>FAQ</Button></Link>
                         <Link to='/blog'><Button className='ms-2'>Blog</Button> </Link>
+
                     </Nav>
                 </Navbar.Collapse>
             </Container>
