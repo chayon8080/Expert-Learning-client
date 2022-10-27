@@ -17,9 +17,10 @@ const Header = () => {
 
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">Home</Nav.Link>
-                        <Nav.Link href="#deets">Courses</Nav.Link>
-                        <Nav.Link href="#deets">FAQ</Nav.Link>
+                        <Nav.Link to='/'>Home</Nav.Link>
+                        <Nav.Link to='/courses'>Courses</Nav.Link>
+                        <Nav.Link to='/faq'>FAQ</Nav.Link>
+                        <Nav.Link to='blog'>Blog</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
