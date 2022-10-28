@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
     const [error, setError] = useState('')
-    const { createUser } = useContext(AuthContext)
+    const { createUser, userUpdateProfile } = useContext(AuthContext)
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
@@ -20,11 +21,21 @@ const Register = () => {
                 console.log(user)
                 setError('')
                 form.reset()
+                handleUserUpdateProfile(name, photoURL)
+                    .then(() => { })
+                    .catch(error => console.log(error))
             })
             .catch(error => {
                 console.error(error)
                 setError(error.message)
             })
+    }
+    const handleUserUpdateProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        userUpdateProfile(profile)
     }
     return (
         <div className='w-25 mx-auto'>
@@ -49,8 +60,7 @@ const Register = () => {
                 <button type="submit" className="btn btn-success">Register</button>
                 <p className='text-danger'>{error}</p>
             </form>
-            {/* <p>Already have an account ?? please <Link to='/login'>Log In</Link></p>
-            <p>Forget password? <button type="button" onClick={handlePasswordReset} className="btn btn-link">Reset Password</button></p> */}
+            <p>Already have an account ?? please <Link to='/login'>Log In</Link></p>
         </div>
     );
 };

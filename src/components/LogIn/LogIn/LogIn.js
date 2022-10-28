@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const LogIn = () => {
@@ -9,7 +9,7 @@ const LogIn = () => {
     const navigate = useNavigate()
     const { signIn } = useContext(AuthContext)
     const location = useLocation();
-    const from = location.state?.from?.pathname
+    const from = location.state?.from?.pathname || '/';
     const handleSubmit = e => {
         e.preventDefault()
         const form = e.target;
@@ -21,7 +21,7 @@ const LogIn = () => {
                 console.log(user)
                 form.reset()
                 setError('')
-                navigate('/')
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error)
@@ -43,8 +43,7 @@ const LogIn = () => {
                 <button type="submit" className="btn btn-success">Log In</button>
                 <p className='text-danger'>{error}</p>
             </form>
-            {/* {success && <p className='text-success'>Successfully Log In</p>} */}
-            {/* <p>New in this site ?? please <Link to='/register'>Register</Link></p> */}
+            <p>New in this site ?? please <Link to='/register'>Register</Link></p>
         </div>
     );
 };
