@@ -6,7 +6,7 @@ import './LeftSiteNav.css'
 const LeftSiteNav = () => {
     const [catagories, setCatagories] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/course-catagories')
+        fetch('https://expert-learning-server.vercel.app/course-catagories')
             .then(res => res.json())
             .then(data => setCatagories(data))
     }, [])
