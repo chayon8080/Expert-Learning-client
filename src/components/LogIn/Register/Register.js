@@ -1,8 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
-import AuthProvider, { AuthContext } from '../../../context/AuthProvider/AuthProvider';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Register = () => {
+    const [error, setError] = useState('')
     const { createUser } = useContext(AuthContext)
     const handleSubmit = e => {
         e.preventDefault();
@@ -16,9 +18,13 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                setError('')
                 form.reset()
             })
-            .catch(e => console.error(e))
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
     }
     return (
         <div className='w-25 mx-auto'>
@@ -41,6 +47,7 @@ const Register = () => {
                     <input type="password" name='password' className="form-control" id="formGroupExampleInput2" placeholder="Password" required />
                 </div>
                 <button type="submit" className="btn btn-success">Register</button>
+                <p className='text-danger'>{error}</p>
             </form>
             {/* <p>Already have an account ?? please <Link to='/login'>Log In</Link></p>
             <p>Forget password? <button type="button" onClick={handlePasswordReset} className="btn btn-link">Reset Password</button></p> */}

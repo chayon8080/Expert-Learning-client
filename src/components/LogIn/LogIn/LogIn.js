@@ -1,13 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const LogIn = () => {
     const [error, setError] = useState('')
     const navigate = useNavigate()
     const { signIn } = useContext(AuthContext)
+    const location = useLocation();
+    const from = location.state?.from?.pathname
     const handleSubmit = e => {
         e.preventDefault()
         const form = e.target;
@@ -18,9 +20,13 @@ const LogIn = () => {
                 const user = result.user;
                 console.log(user)
                 form.reset()
+                setError('')
                 navigate('/')
             })
-            .catch(e => console.error(e))
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
     }
     return (
         <div className='w-25 mx-auto'>
@@ -35,6 +41,7 @@ const LogIn = () => {
                     <input type="password" name='password' className="form-control" id="formGroupExampleInput2" placeholder="Password" required />
                 </div>
                 <button type="submit" className="btn btn-success">Log In</button>
+                <p className='text-danger'>{error}</p>
             </form>
             {/* {success && <p className='text-success'>Successfully Log In</p>} */}
             {/* <p>New in this site ?? please <Link to='/register'>Register</Link></p> */}
