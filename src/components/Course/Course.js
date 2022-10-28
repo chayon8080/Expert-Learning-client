@@ -1,19 +1,20 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import './Course.css'
 const Course = () => {
     const course = useLoaderData();
     const { title, image_url, details } = course
     return (
-        < Card >
+        < Card className='background'>
             <Card.Img variant="top" src={image_url} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>
                     {details}
                 </Card.Text>
-                <Button variant="primary">Get premium access</Button>
+                <Link to='/checkout'><Button variant="primary">Get premium access</Button></Link>
             </Card.Body>
         </Card >
     );

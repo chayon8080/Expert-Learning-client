@@ -8,6 +8,7 @@ import Course from "../../components/Course/Course";
 import LogIn from "../../components/LogIn/LogIn/LogIn";
 import Register from "../../components/LogIn/Register/Register";
 import PrivateRoute from "../privateRoute/PrivateRoute";
+import Checkout from "../../components/Checkout/Checkout";
 
 export const routes = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blogs></Blogs>
+            },
+            {
+                path: '/checkout',
+                element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
             },
             {
                 path: '/login',

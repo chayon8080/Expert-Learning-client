@@ -4,10 +4,11 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../components/shared/Footer/Footer';
 import Header from '../components/shared/Header/Header';
 import LeftSiteNav from '../components/shared/LeftSiteNav/LeftSiteNav';
+import './Main.css'
 
 const Main = () => {
     return (
-        <div>
+        <div className='theme'>
             <Container>
                 <Row>
                     <Header></Header>
