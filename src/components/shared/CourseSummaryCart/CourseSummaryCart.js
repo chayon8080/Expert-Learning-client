@@ -2,6 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 const CourseSummaryCart = ({ course }) => {
     const { title, image_url } = course;
     return (
@@ -12,7 +13,8 @@ const CourseSummaryCart = ({ course }) => {
                     <Card.Title>{title}</Card.Title>
                 </Card.Body>
                 <Card.Footer>
-                    <Button variant="primary">See Details</Button>
+
+                    <Link to={`/course/${course._id}`}><Button variant="primary">See Details</Button></Link>
                 </Card.Footer>
             </Card>
         </CardGroup>

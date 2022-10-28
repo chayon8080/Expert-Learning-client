@@ -1,24 +1,20 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+
+import CourseSummaryCart from '../shared/CourseSummaryCart/CourseSummaryCart';
 
 const Courses = () => {
-    const course = useLoaderData();
-    console.log(course)
-    const { title, image_url, details } = course
+    const courses = useLoaderData();
+    console.log(courses)
     return (
-
-        < Card >
-            <Card.Img variant="top" src={image_url} />
-            <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>
-                    {details}
-                </Card.Text>
-                {/* <Button variant="primary">Get premium access</Button> */}
-            </Card.Body>
-        </Card >
+        <div>
+            {
+                courses.map(course => <CourseSummaryCart
+                    key={course._id}
+                    course={course}
+                ></CourseSummaryCart>)
+            }
+        </div>
     );
 };
 

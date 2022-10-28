@@ -1,12 +1,39 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { useContext } from 'react';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { FaEnvelope, FaGoogle, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 import './Header.css'
 const Header = () => {
+    const { user, providerLogIn, logOut } = useContext(AuthContext)
+    const googeleProvider = new GoogleAuthProvider()
+
+    const handleGooleSignIn = () => {
+        providerLogIn(googeleProvider)
+            .then(result => {
+                const user = result.user
+                console.log(user);
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    }
+    const handleLogOut = () => {
+        logOut()
+            .then(result => {
+                const user = result.user
+                console.log(user);
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    }
     return (
         <Navbar collapseOnSelect className='mb-4' expand="lg" bg="dark" variant="dark">
             <Container>
@@ -22,6 +49,24 @@ const Header = () => {
                         <Link to='/'><Button className='ms-2'>Courses</Button></Link>
                         <Link to='/faq'><Button className='ms-2'>FAQ</Button></Link>
                         <Link to='/blog'><Button className='ms-2'>Blog</Button> </Link>
+                        <Button onClick={handleGooleSignIn} style={{ height: '40px' }} className='ms-2'><FaGoogle></FaGoogle> Log In</Button>
+                        <Nav.Link href="#pricing">
+                            {
+                                user?.uid ?
+                                    <>
+                                        <span>{user?.displayName}</span>
+                                        <Button onClick={handleLogOut}>Log out</Button>
+                                    </>
+                                    :
+                                    <>
+
+                                        <Link to='/login'><Button className='ms-2'><FaEnvelope></FaEnvelope> Log In</Button></Link>
+                                        <Link to='/register'><Button className='ms-2'>Register</Button></Link>
+                                    </>
+                            }</Nav.Link>
+                        <Nav.Link className='ms-2'>{user?.photoURL ?
+                            <Image style={{ height: '40px' }} rooundedCircle src={user?.photoURL}></Image> : <FaUser></FaUser>
+                        }</Nav.Link>
 
                     </Nav>
                 </Navbar.Collapse>
